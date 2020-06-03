@@ -11,11 +11,14 @@
           <td width="550">Description</td>
           <td width="100" align="center">Action</td>
         </tr>
-        <tr v-for="post in posts">
+        <tr v-for="post in posts" :key="post._id">
           <td>{{ post.title }}</td>
           <td>{{ post.description }}</td>
           <td align="center">
-            <router-link v-bind:to="{ name: 'EditPost', params: { id: post._id } }">Edit</router-link> |
+            <router-link v-bind:to="{ name: 'EditPost', params: { id: post._id } }">
+              Edit
+            </router-link>
+            |
             <a href="#" @click="deletePost(post._id)">Delete</a>
           </td>
         </tr>
@@ -29,28 +32,29 @@
 </template>
 
 <script>
-import PostService from '@/services/PostService'
+import PostService from '@/services/PostService';
+
 export default {
   name: 'posts',
-  data () {
+  data() {
     return {
-      posts: []
-    }
+      posts: [],
+    };
   },
-  mounted () {
-    this.getPosts()
+  mounted() {
+    this.getPosts();
   },
   methods: {
-    async getPosts () {
-      const response = await PostService.fetchPosts()
-      this.posts = response.data.posts
+    async getPosts() {
+      const response = await PostService.fetchPosts();
+      this.posts = response.data.posts;
     },
-    async deletePost (id) {
-      await PostService.deletePost(id)
-      this.$router.push({ name: 'Posts' })
-    }
-  }
-}
+    async deletePost(id) {
+      await PostService.deletePost(id);
+      this.$router.push({ name: 'Posts' });
+    },
+  },
+};
 </script>
 <style type="text/css">
 .table-wrap {

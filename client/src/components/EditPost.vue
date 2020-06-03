@@ -16,36 +16,37 @@
 </template>
 
 <script>
-import PostService from '@/services/PostService'
+import PostService from '@/services/PostService';
+
 export default {
   name: 'EditPost',
-  data () {
+  data() {
     return {
       title: '',
-      description: ''
-    }
+      description: '',
+    };
   },
-  mounted () {
-    this.getPost()
+  mounted() {
+    this.getPost();
   },
   methods: {
-    async getPost () {
+    async getPost() {
       const response = await PostService.getPost({
-        id: this.$route.params.id
-      })
-      this.title = response.data.title
-      this.description = response.data.description
+        id: this.$route.params.id,
+      });
+      this.title = response.data.title;
+      this.description = response.data.description;
     },
-    async updatePost () {
+    async updatePost() {
       await PostService.updatePost({
         id: this.$route.params.id,
         title: this.title,
-        description: this.description
-      })
-      this.$router.push({ name: 'Posts' })
-    }
-  }
-}
+        description: this.description,
+      });
+      this.$router.push({ name: 'Posts' });
+    },
+  },
+};
 </script>
 <style type="text/css">
 .form input, .form textarea {

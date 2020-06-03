@@ -16,25 +16,26 @@
 </template>
 
 <script>
-import PostService from '@/services/PostService'
+import PostService from '@/services/PostService';
+
 export default {
   name: 'NewPost',
-  data () {
+  data() {
     return {
       title: '',
       description: '',
-    }
+    };
   },
   methods: {
-    async addPost(){
+    async addPost() {
       await PostService.addPost({
         title: this.title,
         description: this.description,
       });
-      this.$router.push({name: 'Posts'})
-    }
-  }
-}
+      this.$router.push({ name: 'Posts' });
+    },
+  },
+};
 </script>
 
 
@@ -61,5 +62,3 @@ export default {
   cursor: pointer;
 }
 </style>
-
-
